@@ -5,7 +5,7 @@
 #include "trie.h"
 
 Solver::Solver(Board &b, std::string dict_file): b(&b){
-    t = std::unique_ptr<Trie>(new Trie(dict_file));
+    t = std::make_unique<Trie>(dict_file);
     init_adj();
 
     for(int i = 0;i<Board::WIDTH*Board::LENGTH;++i){

@@ -29,7 +29,7 @@ Board::Board(){
     };
 
     for(int i = 0 ; i < WIDTH*LENGTH ; ++i){
-        dice.push_back(std::unique_ptr<Die>(new Die(die_faces[i])));
+        dice.push_back(std::make_unique<Die>(die_faces[i]));
     }
     shake();
 }

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <memory>
 
 #include "trie.h"
 #include "trie_node.h"
@@ -10,7 +11,7 @@
 Trie::Trie(std::string file_name)
 {
     for(int i = 0;i<26;++i){
-        adj[i] = std::unique_ptr<Trie_Node> (new Trie_Node(char(i+int('A'))));
+        adj[i] = std::make_unique<Trie_Node> (char(i+int('A')));
     }
 
     std::ifstream infile(file_name);
@@ -41,7 +42,7 @@ void Trie::insert(std::string s)
     for(unsigned int i =1; i<s.size();++i){
         int index = int(s[i])-int('A');
         if(curr->adj[index] == nullptr){
-            curr->adj[index] = std::unique_ptr<Trie_Node>(new Trie_Node(s[i]));
+            curr->adj[index] = std::make_unique<Trie_Node>(s[i]);
         }
         curr = curr->adj[index].get();
     }
